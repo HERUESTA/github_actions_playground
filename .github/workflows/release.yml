@@ -9,8 +9,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ gihub.ref_name }} # v1.2.3のような値をGitタグから取得
-    permission:
+      VERSION: ${{ github.ref_name }} # v1.2.3のような値をGitタグから取得
+    permissions:
       contents: write # リリースノート作成に必要なパーミッション
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 # ソースコードの取得
@@ -23,4 +23,4 @@ jobs:
       - run: |
           gh release create "${VERSION}" -title "${VERSION}" --generate-notes
           gh release upload "${VERSION}" "${RUNNER_TEMP}/example"
-          
+
